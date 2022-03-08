@@ -14,7 +14,7 @@ module.exports = () => {
 		controllerProviders.searchBylastName
 	);
 	router.get('/email/:providerEmail', controllerProviders.searchByEmail);
-	router.put('/:_id', controllerProviders.updateProvider);
+	router.put('/:providerId', controllerProviders.updateProvider);
 	router.post('/', controllerProviders.addProvider);
 	router.delete('/:providerId', controllerProviders.deleteProvider);
 

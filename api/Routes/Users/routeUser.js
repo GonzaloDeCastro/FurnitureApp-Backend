@@ -5,8 +5,8 @@ const controllerUsers = require('../../Controllers/controllerUsers');
 module.exports = () => {
 	router.get('/all', controllerUsers.getAllUsers);
 	router.get('/:_id', controllerUsers.searchById);
-	router.put('/:_id', controllerUsers.updateUser);
+	router.put('/:userId', controllerUsers.updateUser);
 	router.post('/', controllerUsers.addNewUser);
-	router.delete('/:UserId', controllerUsers.deleteUser);
+	router.delete('/:userId', controllerUsers.deleteUser);
 	return router;
 };

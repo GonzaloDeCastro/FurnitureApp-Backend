@@ -141,18 +141,25 @@ exports.searchByEmail = async (req, res) => {
 
 //Update Provider
 exports.updateProvider = async (req, res) => {
-	let providerId = req.params._id;
-	let update = req.body;
-	const response = await modelProvider.findByIdAndUpdate(
-		providerId,
-		update,
-		(error, preview) => {
-			if (error) {
-				return res.status(500).json({ message: 'error' });
+	try {
+		const { providerId } = req.params;
+
+		const provider = await modelProvider.findByIdAndUpdate(
+			providerId,
+			req.body,
+			{
+				new: true,
 			}
-			return res.status(200).json({ preview, update });
+		);
+		if (provider) {
+			res.json(provider);
+		} else {
+			res.status(404).json({ errors: ['Resource not found'] });
 		}
-	);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ errors: ['An internal server error ocurred.'] });
+	}
 };
 
 //Delete Providers by ID

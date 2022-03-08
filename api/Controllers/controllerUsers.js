@@ -65,21 +65,28 @@ exports.searchById = async (req, res) => {
 
 // Update Users
 exports.updateUser = async (req, res) => {
-	let id = req.params._id;
-	let update = req.body;
-	const response = await modelUser.findByIdAndUpdate(id, update, (error, preview) => {
-		if (error) {
-			return res.status(500).json({ message: 'error' });
+	try {
+		const { userId } = req.params;
+
+		const user = await modelUser.findByIdAndUpdate(userId, req.body, {
+			new: true,
+		});
+		if (user) {
+			res.json(user);
+		} else {
+			res.status(404).json({ errors: ['Resource not found'] });
 		}
-		return res.status(200).json({ preview, update });
-	});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ errors: ['An internal server error ocurred.'] });
+	}
 };
 
 // Delete Users by ID
 exports.deleteUser = async (req, res) => {
 	try {
 		const response = await modelUser.findOneAndRemove({
-			_id: req.params.UserId,
+			_id: req.params.userId,
 		});
 		if (!response || response.length === 0) {
 			return res.status(404).json({
