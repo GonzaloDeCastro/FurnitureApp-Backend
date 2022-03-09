@@ -1,5 +1,4 @@
 const modelProvider = require('../Models/modelProvider');
-const { request, response } = require('express');
 
 // Get Providers
 exports.getAllProviders = async (req, res) => {
@@ -141,20 +140,9 @@ exports.searchByEmail = async (req, res) => {
 };
 
 //Update Provider
-exports.updateProvider = async (req = request, res = response) => {
+exports.updateProvider = async (req, res) => {
 	try {
 		const { providerId } = req.params;
-
-		const nameAlreadyUsed = await Product.findOne({
-			name: req.body.name,
-			_id: { $ne: providerId },
-		});
-
-		if (nameAlreadyUsed) {
-			return res.status(400).json({
-				errors: ['A provider with the same name already exists.'],
-			});
-		}
 
 		const provider = await modelProvider.findByIdAndUpdate(providerId, req.body, {
 			new: true,
