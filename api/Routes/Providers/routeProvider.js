@@ -1,22 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const controllerProviders = require('../../Controllers/controllerProviders');
+const controllerProviders = require("../../Controllers/controllerProviders");
 
 module.exports = () => {
-	router.get('/all', controllerProviders.getAllProviders);
-	router.get('/:providerId', controllerProviders.searchById);
-	router.get(
-		'/firstname/:providerFirstName',
-		controllerProviders.searchByfirstName
-	);
-	router.get(
-		'/lastname/:providerLastName',
-		controllerProviders.searchBylastName
-	);
-	router.get('/email/:providerEmail', controllerProviders.searchByEmail);
-	router.put('/:providerId', controllerProviders.updateProvider);
-	router.post('/', controllerProviders.addProvider);
-	router.delete('/:providerId', controllerProviders.deleteProvider);
+  router.get("/all", controllerProviders.getAllProviders);
+  router.get("/:providerId", controllerProviders.searchById);
+  router.get("/name/:providerName", controllerProviders.searchByName);
+  router.get("/email/:providerEmail", controllerProviders.searchByEmail);
+  router.put("/:providerId", controllerProviders.updateProvider);
+  router.post("/", controllerProviders.addProvider);
+  router.delete("/:providerId", controllerProviders.deleteProvider);
 
-	return router;
+  return router;
 };
