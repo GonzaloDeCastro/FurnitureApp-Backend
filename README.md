@@ -51,7 +51,6 @@ Postman Collections Link https://www.postman.com/collections/c8bf7c7411430f3c6cd
 ```
 GET: http://localhost:4016/api/providers/all
 GET: http://localhost:4016/api/providers/id
-GET: http://localhost:4016/api/providers/firstname/
 GET: http://localhost:4016/api/providers/name/
 GET: http://localhost:4016/api/providers/email/
 POST: http://localhost:4016/api/providers/
